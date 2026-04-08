@@ -114,7 +114,7 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
     // const pdfBuffer = await generatePdfFromHtml(jsonContent.html)
 
     // return pdfBuffer
-    try {
+try {
     const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
         contents: prompt,
@@ -124,15 +124,25 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
         }
     })
 
+    // 
+    if (!response || !response.text) {
+        throw new Error("Invalid AI response")
+    }
+
     const jsonContent = JSON.parse(response.text)
+
+    if (!jsonContent.html) {
+        throw new Error("HTML not generated")
+    }
+
     const pdfBuffer = await generatePdfFromHtml(jsonContent.html)
 
     return pdfBuffer
 
 } catch (err) {
-    console.log("AI ERROR:", err.message)
+    console.log("🔥 AI ERROR:", err.message)
 
-    throw new Error("AI service failed, try again")
+    throw new Error("Resume generation failed, please try again")
 }
 
 }
