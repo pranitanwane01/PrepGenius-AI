@@ -1,0 +1,56 @@
+
+
+
+.navbar {
+  width: 100%;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #334155;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Logo */
+.navbar-logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #6366f1;
+  cursor: pointer;
+}
+
+/* Right side */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Username */
+.navbar-user {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* Button */
+.navbar-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  color: white;
+  transition: 0.3s;
+}
+
+.navbar-btn:hover {
+  transform: scale(1.05);
+}

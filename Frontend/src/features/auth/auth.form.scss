@@ -1,0 +1,125 @@
+
+/* ===== VARIABLES ===== */
+$bg-main: #0f172a;
+$bg-card: rgba(30, 41, 59, 0.7);
+$border: #334155;
+
+$text-primary: #f1f5f9;
+$text-secondary: #94a3b8;
+
+$accent: #6366f1;
+$accent-hover: #4f46e5;
+
+/* ===== MAIN PAGE ===== */
+main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== FORM CARD ===== */
+.form-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 30px;
+  border-radius: 16px;
+  background: $bg-card;
+  backdrop-filter: blur(15px);
+  border: 1px solid $border;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  color: $text-primary;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+/* ===== HEADING ===== */
+.form-container h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* ===== INPUT GROUP ===== */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+/* LABEL */
+.input-group label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: $text-secondary;
+}
+
+/* INPUT */
+.input-group input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid $border;
+  background: #020617;
+  color: $text-primary;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: $accent;
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.6);
+}
+
+/* ===== BUTTON ===== */
+.button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  color: white;
+}
+
+.primary-button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
+}
+
+/* ===== TEXT ===== */
+.form-container p {
+  margin-top: 15px;
+  font-size: 14px;
+  color: $text-secondary;
+}
+
+.form-container a {
+  color: $accent;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.form-container a:hover {
+  text-decoration: underline;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
