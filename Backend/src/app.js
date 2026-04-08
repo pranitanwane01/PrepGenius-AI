@@ -18,6 +18,11 @@ app.use(cors({
   credentials: true
 }))
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", "true")
+  next()
+})
+
 /* require all the routes here */
 const authRouter = require("./routes/auth.routes")
 const interviewRouter = require("./routes/interview.routes")
