@@ -162,11 +162,16 @@ try {
 }
 
 async function generatePdfFromHtml(htmlContent) {
-  const browser = await puppeteer.launch({
-    args: chromium.args,
-    executablePath: await chromium.executablePath(),
-    headless: chromium.headless,
-  });
+ const browser = await puppeteer.launch({
+  args: [
+    ...chromium.args,
+    "--no-sandbox",
+    "--disable-setuid-sandbox"
+  ],
+  executablePath: await chromium.executablePath(),
+  headless: true,
+  defaultViewport: chromium.defaultViewport,
+});
 
   const page = await browser.newPage();
 
