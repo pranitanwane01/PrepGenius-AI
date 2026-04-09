@@ -8,6 +8,35 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GOOGLE_GENAI_API_KEY,
 });
 
+async function callAI(prompt, schema, retries = 3) {
+    try {
+        const response = await ai.models.generateContent({
+            model: "gemini-1.5-flash", // ✅ stable model
+            contents: prompt,
+            config: {
+                responseMimeType: "application/json",
+                responseSchema: zodToJsonSchema(schema),
+            }
+        })
+
+        return response
+
+    } catch (err) {
+
+        console.log("❌ AI ERROR:", err.message)
+
+        if (retries > 0) {
+            console.log(`🔁 Retrying... (${retries} left)`)
+
+            // wait 2 seconds
+            await new Promise(resolve => setTimeout(resolve, 3000))
+
+            return callAI(prompt, schema, retries - 1)
+        }
+
+        throw new Error("AI failed after retries")
+    }
+}
 
 const interviewReportSchema = z.object({
   matchScore: z
@@ -106,16 +135,30 @@ async function generateInterviewReport({
                         Job Description: ${jobDescription}
 `;
 
-  const response = await ai.models.generateContent({
-    model: "gemini-1.5-flash",
-    contents: prompt,
-    config: {
-      responseMimeType: "application/json",
-      responseSchema: zodToJsonSchema(interviewReportSchema),
-    },
-  });
+  const response = await callAI(prompt, interviewReportSchema)
 
-  return JSON.parse(response.text);
+//   return JSON.parse(response.text);
+const rawText =
+    response?.text ||
+    response?.candidates?.[0]?.content?.parts?.[0]?.text
+
+if (!rawText) {
+    console.log("❌ FULL AI RESPONSE:", response)
+    throw new Error("Invalid AI response")
+}
+
+try {
+    const cleanText = rawText
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim()
+
+    return JSON.parse(cleanText)
+
+} catch (err) {
+    console.log("❌ PARSE ERROR:", rawText)
+    throw new Error("Invalid JSON format")
+}
 }
 
 async function generatePdfFromHtml(htmlContent) {
@@ -167,14 +210,7 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
                     `;
 
   try {
-    const response = await ai.models.generateContent({
-      model: "gemini-1.5-flash",
-      contents: prompt,
-      config: {
-        responseMimeType: "application/json",
-        responseSchema: zodToJsonSchema(resumePdfSchema),
-      },
-    });
+    const response = await callAI(prompt, resumePdfSchema);
 
     
     const rawText =
