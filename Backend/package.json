@@ -4,13 +4,12 @@
   "description": "",
   "main": "index.js",
   "engines": {
-  "node": "18.x"
-},
+    "node": "18.x"
+  },
   "scripts": {
     "start": "node server.js",
-    "dev": "npx nodemon server.js",
-    "@sparticuz/chromium": "^latest",
-    "puppeteer-core": "^latest"
+    "dev": "npx nodemon server.js"
+  
   },
   "keywords": [],
   "author": "",
@@ -26,6 +25,7 @@
     "mongoose": "^9.4.1",
     "multer": "^2.0.2",
     "pdf-parse": "^2.4.5",
+    "puppeteer": "^24.40.0",
     "zod": "^3.25.76",
     "zod-to-json-schema": "^3.25.1"
   }
