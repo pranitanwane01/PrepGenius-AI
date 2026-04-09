@@ -9,7 +9,6 @@
   "scripts": {
     "start": "node server.js",
     "dev": "npx nodemon server.js"
-  
   },
   "keywords": [],
   "author": "",
