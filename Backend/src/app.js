@@ -1,3 +1,4 @@
+
 const express = require("express")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
@@ -6,14 +7,12 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
-// app.use(cors({
-//     origin: "http://localhost:5173",
-//     credentials: true
-// }))
+
+
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://prep-genius-ai.vercel.app" // later update
+    "https://prep-genius-ai-kohl.vercel.app"
   ],
   credentials: true
 }))
