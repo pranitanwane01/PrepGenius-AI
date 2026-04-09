@@ -10,7 +10,7 @@ const ai = new GoogleGenAI({
 async function callAI(prompt, schema, retries = 3) {
     try {
         const response = await ai.models.generateContent({
-            model: "gemini-1.5-flash", // ✅ stable model
+            model: "gemini-2.0-flash",
             contents: prompt,
             config: {
                 responseMimeType: "application/json",
