@@ -251,10 +251,37 @@ try {
 
     return pdfBuffer;
   } catch (err) {
-    console.log("🔥 AI ERROR:", err.message);
+  console.log("🔥 AI ERROR:", err.message);
+  console.log("⚠️ Using fallback resume...");
 
-    throw new Error("Resume generation failed, please try again");
-  }
+  const fallbackHtml = `
+    <html>
+      <head>
+        <style>
+          body { font-family: Arial; padding: 20px; }
+          h1 { color: #333; }
+          h2 { margin-top: 20px; }
+        </style>
+      </head>
+      <body>
+        <h1>Resume</h1>
+
+        <h2>Summary</h2>
+        <p>${selfDescription || "N/A"}</p>
+
+        <h2>Experience</h2>
+        <p>${resume?.slice(0, 1500) || "N/A"}</p>
+
+        <h2>Target Role</h2>
+        <p>${jobDescription || "N/A"}</p>
+      </body>
+    </html>
+  `;
+
+  const pdfBuffer = await generatePdfFromHtml(fallbackHtml);
+
+  return pdfBuffer;
+}
 }
 
 module.exports = { generateInterviewReport, generateResumePdf };
