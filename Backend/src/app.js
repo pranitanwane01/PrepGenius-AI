@@ -27,10 +27,18 @@ const interviewRouter = require("./routes/interview.routes")
 app.use("/api/auth", authRouter)
 app.use("/api/interview", interviewRouter)
 
-// Global error handler
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    message: "Endpoint not found"
+  })
+})
+
+// Global error handler (must be last)
 app.use((err, req, res, next) => {
   console.error("❌ ERROR:", err.message)
-  res.status(500).json({
+  console.error("Stack:", err.stack)
+  res.status(err.status || 500).json({
     message: "Internal server error",
     error: process.env.NODE_ENV === "production" ? "Error" : err.message
   })
