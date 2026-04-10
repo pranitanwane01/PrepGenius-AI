@@ -6,10 +6,12 @@ const cors = require("cors")
 
 const app = express()
 
-app.use(express.json())
+app.use(express.json({ limit: "50mb" }))
+app.use(express.urlencoded({ limit: "50mb", extended: true }))
 app.use(cookieParser())
 
-app.use(cors({
+// CORS Configuration with explicit handling
+const corsOptions = {
   origin: [
     "http://localhost:5173",
     "http://localhost:3000",
@@ -18,8 +20,16 @@ app.use(cors({
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}))
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  exposedHeaders: ["Content-Type"],
+  optionsSuccessStatus: 200,
+  maxAge: 86400
+}
+
+app.use(cors(corsOptions))
+
+// Handle preflight requests explicitly
+app.options("*", cors(corsOptions))
 
 const authRouter = require("./routes/auth.routes")
 const interviewRouter = require("./routes/interview.routes")
