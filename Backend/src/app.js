@@ -10,7 +10,7 @@ app.use(express.json({ limit: "50mb" }))
 app.use(express.urlencoded({ limit: "50mb", extended: true }))
 app.use(cookieParser())
 
-// CORS Configuration with explicit handling
+// CORS Configuration
 const corsOptions = {
   origin: [
     "http://localhost:5173",
@@ -27,9 +27,6 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
-
-// Handle preflight requests explicitly
-app.options("*", cors(corsOptions))
 
 const authRouter = require("./routes/auth.routes")
 const interviewRouter = require("./routes/interview.routes")
