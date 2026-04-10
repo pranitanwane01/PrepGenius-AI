@@ -6,6 +6,165 @@ const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 });
 
+async function callAI(prompt, retries = 3) {
+    try {
+        console.log("🤖 Calling Groq API...");
+        
+        const message = await groq.messages.create({
+            model: "mixtral-8x7b-32768",
+            max_tokens: 2000,
+            messages: [
+                {
+                    role: "user",
+                    content: prompt + "\n\nRespond ONLY with valid JSON, no code blocks."
+                }
+            ]
+        });
+
+        console.log("✅ Groq API response received");
+        return message.content[0].text;
+
+    } catch (err) {
+        console.log("❌ AI ERROR:", err.message);
+
+        if (retries > 0) {
+            console.log(`🔁 Retrying... (${retries} left)`);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            return callAI(prompt, retries - 1);
+        }
+
+        throw new Error("AI failed: " + err.message);
+    }
+}
+
+async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
+  const prompt = `You are an expert interview coach. Generate a JSON interview report with this exact structure:
+{
+  "matchScore": 0-100,
+  "title": "job title",
+  "technicalQuestions": [{"question": "...", "intention": "...", "answer": "..."}, ...],
+  "behavioralQuestions": [{"question": "...", "intention": "...", "answer": "..."}, ...],
+  "skillGaps": [{"skill": "...", "severity": "low|medium|high"}, ...],
+  "preparationPlan": [{"day": 1, "focus": "...", "tasks": ["...", ...]}, ...]
+}
+
+Resume: ${resume}
+Self Description: ${selfDescription}
+Job Description: ${jobDescription}
+
+Respond ONLY with the JSON object, no markdown or explanation.`;
+
+  try {
+    const rawText = await callAI(prompt);
+
+    if (!rawText) throw new Error("Invalid response");
+
+    const cleanText = rawText
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .replace(/`/g, "")
+      .trim();
+
+    const result = JSON.parse(cleanText);
+    console.log("✅ Interview report generated successfully");
+    return result;
+
+  } catch (err) {
+    console.log("❌ Generate Report Error:", err.message);
+    throw err;
+  }
+}
+
+async function generatePdfFromHtml(htmlContent) {
+  try {
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
+
+    const page = await browser.newPage();
+    await page.setContent(htmlContent, { waitUntil: "domcontentloaded" });
+    const pdfBuffer = await page.pdf({ format: "A4", printBackground: true });
+    await browser.close();
+
+    return pdfBuffer;
+  } catch (err) {
+    console.log("❌ PDF Generation Error:", err.message);
+    throw err;
+  }
+}
+
+async function generateResumePdf({ resume, selfDescription, jobDescription }) {
+  const prompt = `Generate professional ATS-friendly resume HTML. Respond ONLY with valid JSON:
+{
+  "html": "<complete html resume content here>"
+}
+
+Resume: ${resume}
+Self Description: ${selfDescription}
+Target Job: ${jobDescription}
+
+Create professional HTML (no markdown). Include all relevant experience tailored to the job.`;
+
+  try {
+    const rawText = await callAI(prompt);
+
+    if (!rawText) throw new Error("Invalid response");
+
+    const cleanText = rawText
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .replace(/`/g, "")
+      .trim();
+
+    const jsonContent = JSON.parse(cleanText);
+
+    if (!jsonContent.html || jsonContent.html.length < 50) {
+      throw new Error("HTML content too short");
+    }
+
+    return await generatePdfFromHtml(jsonContent.html);
+
+  } catch (err) {
+    console.log("⚠️ Using fallback resume");
+
+    const fallbackHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; color: #333; line-height: 1.6; }
+    h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+    h2 { color: #34495e; margin-top: 20px; margin-bottom: 10px; }
+    .container { max-width: 900px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Professional Resume</h1>
+    <h2>Professional Summary</h2>
+    <p>${selfDescription || "Experienced professional with strong technical background."}</p>
+    <h2>Experience</h2>
+    <p>${resume?.slice(0, 1500) || "Professional experience in relevant technologies and methodologies."}</p>
+    <h2>Target Position</h2>
+    <p>${jobDescription?.slice(0, 500) || "Seeking a challenging position to leverage expertise."}</p>
+  </div>
+</body>
+</html>`;
+
+    return await generatePdfFromHtml(fallbackHtml);
+  }
+}
+
+module.exports = { generateInterviewReport, generateResumePdf };
+const Groq = require("groq-sdk");
+const { z } = require("zod");
+const puppeteer = require("puppeteer");
+
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
+});
+
 async function callAI(prompt, schema, retries = 3) {
     try {
         console.log("🤖 Calling Groq API...");
