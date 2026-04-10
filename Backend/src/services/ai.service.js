@@ -8,6 +8,151 @@ const groq = new Groq({
 
 async function callAI(prompt, schema, retries = 3) {
     try {
+        console.log("🤖 Calling Groq API...");
+        
+        const message = await groq.messages.create({
+            model: "mixtral-8x7b-32768",
+            max_tokens: 2000,
+            messages: [
+                {
+                    role: "user",
+                    content: prompt + "\n\nRespond ONLY with valid JSON."
+                }
+            ]
+        });
+
+        console.log("✅ Groq API response received");
+        return {
+            text: message.content[0].text
+        };
+
+    } catch (err) {
+        console.log("❌ AI ERROR:", err.message);
+
+        if (retries > 0) {
+            console.log(`🔁 Retrying... (${retries} left)`);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            return callAI(prompt, schema, retries - 1);
+        }
+
+        throw new Error("AI failed: " + err.message);
+    }
+}
+
+const interviewReportSchema = z.object({
+  matchScore: z.number(),
+  technicalQuestions: z.array(z.object({
+    question: z.string(),
+    intention: z.string(),
+    answer: z.string(),
+  })),
+  behavioralQuestions: z.array(z.object({
+    question: z.string(),
+    intention: z.string(),
+    answer: z.string(),
+  })),
+  skillGaps: z.array(z.object({
+    skill: z.string(),
+    severity: z.enum(["low", "medium", "high"]),
+  })),
+  preparationPlan: z.array(z.object({
+    day: z.number(),
+    focus: z.string(),
+    tasks: z.array(z.string()),
+  })),
+  title: z.string(),
+});
+
+async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
+  const prompt = `Generate a comprehensive interview report JSON for:
+Resume: ${resume}
+Self Description: ${selfDescription}
+Job: ${jobDescription}
+
+Return ONLY valid JSON with: matchScore (0-100), title, technicalQuestions (5-7), behavioralQuestions (3-5), skillGaps (3-5), preparationPlan (7 days).`;
+
+  try {
+    const response = await callAI(prompt, interviewReportSchema);
+    const rawText = response?.text;
+
+    if (!rawText) throw new Error("Invalid response");
+
+    const cleanText = rawText
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .replace(/`/g, "")
+      .trim();
+
+    return JSON.parse(cleanText);
+
+  } catch (err) {
+    console.log("❌ Error:", err.message);
+    throw err;
+  }
+}
+
+async function generatePdfFromHtml(htmlContent) {
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+
+  const page = await browser.newPage();
+  await page.setContent(htmlContent, { waitUntil: "domcontentloaded" });
+  const pdfBuffer = await page.pdf({ format: "A4", printBackground: true });
+  await browser.close();
+
+  return pdfBuffer;
+}
+
+async function generateResumePdf({ resume, selfDescription, jobDescription }) {
+  const prompt = `Generate ATS-friendly resume HTML from:
+Resume: ${resume}
+Self Description: ${selfDescription}
+Job: ${jobDescription}
+
+Return ONLY valid JSON with "html" field containing the complete HTML.`;
+
+  try {
+    const response = await callAI(prompt, z.object({ html: z.string() }));
+    const rawText = response?.text;
+
+    if (!rawText) throw new Error("Invalid response");
+
+    const cleanText = rawText
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .replace(/`/g, "")
+      .trim();
+
+    const jsonContent = JSON.parse(cleanText);
+
+    if (!jsonContent.html || jsonContent.html.length < 50) {
+      throw new Error("HTML too short");
+    }
+
+    return await generatePdfFromHtml(jsonContent.html);
+
+  } catch (err) {
+    console.log("⚠️ Using fallback resume");
+
+    const fallbackHtml = `<html><head><style>body { font-family: Arial; padding: 20px; } h1 { color: #2c3e50; border-bottom: 2px solid #3498db; } h2 { margin-top: 15px; }</style></head><body><h1>Resume</h1><h2>Summary</h2><p>${selfDescription || "N/A"}</p><h2>Experience</h2><p>${resume?.slice(0, 1500) || "N/A"}</p><h2>Target Role</h2><p>${jobDescription?.slice(0, 500) || "N/A"}</p></body></html>`;
+
+    return await generatePdfFromHtml(fallbackHtml);
+  }
+}
+
+module.exports = { generateInterviewReport, generateResumePdf };
+const Groq = require("groq-sdk");
+const { z } = require("zod");
+const puppeteer = require("puppeteer");
+
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
+});
+
+async function callAI(prompt, schema, retries = 3) {
+    try {
         console.log("🤖 Calling Groq API with prompt...");
         
         const message = await groq.messages.create({
@@ -309,7 +454,6 @@ Return ONLY valid JSON:
 }
 
 module.exports = { generateInterviewReport, generateResumePdf };
-const { GoogleGenAI } = require("@google/genai");
 const { z } = require("zod");
 const { zodToJsonSchema } = require("zod-to-json-schema");
 const puppeteer = require("puppeteer");
