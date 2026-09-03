@@ -1,147 +1,651 @@
-// ── Variables ────────────────────────────────────────────────────────────────
-$bg-page:        #0d1117;
-$bg-card:        #161b22;
-$bg-panel:       #1c2230;
-$bg-input:       #1e2535;
-$border-color:   #2a3348;
-$text-primary:   #e6edf3;
-$text-muted:     #7d8590;
-$accent:         #ff2d78;
-$accent-alt:     #ff6b9d;
-$badge-required: #ff2d78;
-$badge-best:     #ff2d78;
-$info-bg:        #1b2a4a;
-$info-border:    #2d4a7a;
-$font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+// // ── Variables ────────────────────────────────────────────────────────────────
+// $bg-page:        #0d1117;
+// $bg-card:        #161b22;
+// $bg-panel:       #1c2230;
+// $bg-input:       #1e2535;
+// $border-color:   #2a3348;
+// $text-primary:   #e6edf3;
+// $text-muted:     #7d8590;
+// $accent:         #ff2d78;
+// $accent-alt:     #ff6b9d;
+// $badge-required: #ff2d78;
+// $badge-best:     #ff2d78;
+// $info-bg:        #1b2a4a;
+// $info-border:    #2d4a7a;
+// $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-// ── Page Shell ───────────────────────────────────────────────────────────────
+// // ── Page Shell ───────────────────────────────────────────────────────────────
+// .home-page {
+//     width: 100%;
+//     min-height: 100vh;
+//     background-color: $bg-page;
+//     color: $text-primary;
+//     font-family: $font-stack;
+
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     padding: 3rem 1.5rem;
+//     gap: 2rem;
+// }
+
+// // ── Page Header ──────────────────────────────────────────────────────────────
+// .page-header {
+//     text-align: center;
+
+//     h1 {
+//         font-size: 2.25rem;
+//         font-weight: 700;
+//         margin-bottom: 0.5rem;
+//         color: $text-primary;
+//     }
+
+//     p {
+//         color: $text-muted;
+//         font-size: 0.95rem;
+//         max-width: 480px;
+//         margin: 0 auto;
+//         line-height: 1.6;
+//     }
+
+//     .highlight {
+//         color: $accent;
+//     }
+// }
+
+// // ── Main Card ─────────────────────────────────────────────────────────────────
+// .interview-card {
+//     width: 100%;
+//     max-width: 900px;
+//     background-color: $bg-card;
+//     border: 1px solid $border-color;
+//     border-radius: 1rem;
+//     overflow: hidden;
+
+//     &__body {
+//         display: flex;
+//         min-height: 520px;
+//     }
+
+//     &__footer {
+//         display: flex;
+//         align-items: center;
+//         justify-content: space-between;
+//         padding: 1rem 1.5rem;
+//         border-top: 1px solid $border-color;
+
+//         .footer-info {
+//             font-size: 0.8rem;
+//             color: $text-muted;
+//         }
+//     }
+// }
+
+// // ── Panels ────────────────────────────────────────────────────────────────────
+// .panel-divider {
+//     width: 1px;
+//     background-color: $border-color;
+//     flex-shrink: 0;
+// }
+
+// .panel {
+//     flex: 1;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 1rem;
+//     padding: 1.5rem;
+
+//     &__header {
+//         display: flex;
+//         align-items: center;
+//         gap: 0.5rem;
+//         margin-bottom: 0.25rem;
+
+//         h2 {
+//             font-size: 1rem;
+//             font-weight: 600;
+//             color: $text-primary;
+//             flex: 1;
+//         }
+//     }
+
+//     &__icon {
+//         display: flex;
+//         align-items: center;
+//         color: $accent;
+//     }
+
+//     &__textarea {
+//         flex: 1;
+//         width: 100%;
+//         background-color: $bg-input;
+//         border: 1px solid $border-color;
+//         border-radius: 0.5rem;
+//         padding: 0.75rem 1rem;
+//         color: $text-primary;
+//         font-family: $font-stack;
+//         font-size: 0.875rem;
+//         resize: none;
+//         outline: none;
+//         transition: border-color 0.2s;
+//         line-height: 1.5;
+
+//         &::placeholder {
+//             color: $text-muted;
+//         }
+
+//         &:focus {
+//             border-color: $accent;
+//         }
+
+//         &--short {
+//             flex: unset;
+//             height: 96px;
+//         }
+//     }
+
+//     &--left {
+//         position: relative;
+
+//         .char-counter {
+//             position: absolute;
+//             bottom: 2.25rem;
+//             right: 2rem;
+//             font-size: 0.75rem;
+//             color: $text-muted;
+//         }
+//     }
+
+//     &--right {
+//         gap: 0.75rem;
+//     }
+// }
+
+// // ── Badges ────────────────────────────────────────────────────────────────────
+// .badge {
+//     font-size: 0.7rem;
+//     font-weight: 600;
+//     padding: 0.15rem 0.5rem;
+//     border-radius: 0.3rem;
+//     text-transform: uppercase;
+//     letter-spacing: 0.03em;
+
+//     &--required {
+//         background-color: rgba($badge-required, 0.15);
+//         color: $badge-required;
+//         border: 1px solid rgba($badge-required, 0.3);
+//     }
+
+//     &--best {
+//         background-color: rgba($badge-best, 0.15);
+//         color: $badge-best;
+//         border: 1px solid rgba($badge-best, 0.3);
+//     }
+// }
+
+// // ── Section Label ─────────────────────────────────────────────────────────────
+// .section-label {
+//     display: flex;
+//     align-items: center;
+//     gap: 0.5rem;
+//     font-size: 0.875rem;
+//     font-weight: 500;
+//     color: $text-primary;
+//     margin-bottom: 0.25rem;
+// }
+
+// // ── Dropzone ──────────────────────────────────────────────────────────────────
+// .upload-section {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.5rem;
+// }
+
+// .dropzone {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     gap: 0.35rem;
+//     padding: 1.5rem 1rem;
+//     background-color: $bg-input;
+//     border: 2px dashed $border-color;
+//     border-radius: 0.6rem;
+//     cursor: pointer;
+//     transition: border-color 0.2s, background-color 0.2s;
+
+//     &:hover {
+//         border-color: $accent;
+//         background-color: rgba($accent, 0.05);
+//     }
+
+//     &__icon {
+//         color: $accent;
+//         margin-bottom: 0.25rem;
+//     }
+
+//     &__title {
+//         font-size: 0.875rem;
+//         font-weight: 500;
+//         color: $text-primary;
+//         margin: 0;
+//     }
+
+//     &__subtitle {
+//         font-size: 0.75rem;
+//         color: $text-muted;
+//         margin: 0;
+//     }
+// }
+
+// // ── OR Divider ────────────────────────────────────────────────────────────────
+// .or-divider {
+//     display: flex;
+//     align-items: center;
+//     gap: 0.75rem;
+//     color: $text-muted;
+//     font-size: 0.75rem;
+
+//     &::before,
+//     &::after {
+//         content: '';
+//         flex: 1;
+//         height: 1px;
+//         background-color: $border-color;
+//     }
+
+//     span {
+//         white-space: nowrap;
+//     }
+// }
+
+// // ── Self Description ──────────────────────────────────────────────────────────
+// .self-description {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.5rem;
+// }
+
+// // ── Info Box ──────────────────────────────────────────────────────────────────
+// .info-box {
+//     display: flex;
+//     align-items: flex-start;
+//     gap: 0.6rem;
+//     padding: 0.75rem 1rem;
+//     background-color: $info-bg;
+//     border: 1px solid $info-border;
+//     border-radius: 0.5rem;
+
+//     &__icon {
+//         flex-shrink: 0;
+//         color: #4a90e2;
+//         margin-top: 1px;
+//     }
+
+//     p {
+//         margin: 0;
+//         font-size: 0.8rem;
+//         color: #8ab4f8;
+//         line-height: 1.5;
+
+//         strong {
+//             color: $text-primary;
+//         }
+//     }
+// }
+
+// // ── Generate Button ───────────────────────────────────────────────────────────
+// .generate-btn {
+//     display: flex;
+//     align-items: center;
+//     gap: 0.5rem;
+//     padding: 0.75rem 1.5rem;
+//     background: linear-gradient(135deg, $accent 0%, darken($accent, 10%) 100%);
+//     color: #fff;
+//     font-size: 0.9rem;
+//     font-weight: 600;
+//     border: none;
+//     border-radius: 0.5rem;
+//     cursor: pointer;
+//     transition: opacity 0.2s, transform 0.1s;
+//     font-family: $font-stack;
+
+//     &:hover {
+//         opacity: 0.9;
+//     }
+
+//     &:active {
+//         transform: scale(0.98);
+//     }
+// }
+
+// .recent-reports{
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.75rem;
+//     width: 100%;
+//     max-width: 900px;
+
+//     .reports-list{
+//         display: flex;
+//         gap: 0.75rem;
+//         flex-wrap: wrap;
+
+//         .report-item{
+//             background-color: $bg-card;
+//             border: 1px solid $border-color;
+//             border-radius: 0.5rem;
+//             padding: 1rem;
+//             flex: 1;
+//             display: flex;
+//             flex-direction: column;
+//             gap: 0.5rem;
+//             cursor: pointer;
+//             flex-shrink: 0;
+
+//             .match-score {
+//                 font-size: 0.8rem;
+//                 font-weight: 600;
+//                 color: $accent;
+//                 align-items: flex-start;
+//             }
+//         }
+//     }
+// }
+
+
+// // ── Page Footer ───────────────────────────────────────────────────────────────
+// .page-footer {
+//     display: flex;
+//     gap: 1.5rem;
+
+//     a {
+//         font-size: 0.8rem;
+//         color: $text-muted;
+//         text-decoration: none;
+//         transition: color 0.2s;
+
+//         &:hover {
+//             color: $text-primary;
+//         }
+//     }
+// }
+
+
+// ============================================================
+// CareerPrep AI — Cyan Dark Theme
+// ============================================================
+
+// ── Variables ─────────────────────────────────────────────────
+
+$bg-page:        #071014;
+$bg-card:        #0d1a20;
+$bg-panel:       #101f26;
+$bg-input:       #0a171c;
+
+$border-color:   #1d3942;
+$border-hover:   #285762;
+
+$text-primary:   #e8f7fa;
+$text-secondary: #b3cbd1;
+$text-muted:     #718b93;
+
+$accent:         #00e5ff;
+$accent-dark:    #00a8bd;
+$accent-light:   #67efff;
+
+$success:        #2ee6a6;
+$danger:         #ff647c;
+
+$info-bg:        #09242c;
+$info-border:    #14515d;
+
+$font-stack:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+
+
+// ── Page Shell ────────────────────────────────────────────────
+
 .home-page {
     width: 100%;
     min-height: 100vh;
-    background-color: $bg-page;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba($accent, 0.08),
+            transparent 35%
+        ),
+        $bg-page;
+
     color: $text-primary;
     font-family: $font-stack;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 3rem 1.5rem;
+
+    padding: 4rem 1.5rem;
     gap: 2rem;
+
+    box-sizing: border-box;
 }
 
-// ── Page Header ──────────────────────────────────────────────────────────────
+
+// ── Page Header ───────────────────────────────────────────────
+
 .page-header {
     text-align: center;
+    max-width: 720px;
 
     h1 {
-        font-size: 2.25rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
+        font-size: clamp(2rem, 4vw, 2.75rem);
+        font-weight: 750;
+        letter-spacing: -0.04em;
+        margin: 0 0 0.75rem;
+
         color: $text-primary;
     }
 
     p {
         color: $text-muted;
         font-size: 0.95rem;
-        max-width: 480px;
+        max-width: 560px;
         margin: 0 auto;
-        line-height: 1.6;
+        line-height: 1.7;
     }
 
     .highlight {
         color: $accent;
+
+        text-shadow:
+            0 0 25px rgba($accent, 0.22);
     }
 }
 
-// ── Main Card ─────────────────────────────────────────────────────────────────
+
+// ── Main Card ─────────────────────────────────────────────────
+
 .interview-card {
     width: 100%;
-    max-width: 900px;
-    background-color: $bg-card;
+    max-width: 980px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.025),
+            rgba(255, 255, 255, 0)
+        ),
+        $bg-card;
+
     border: 1px solid $border-color;
-    border-radius: 1rem;
+    border-radius: 1.25rem;
+
     overflow: hidden;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba($accent, 0.02);
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+
+    &:hover {
+        border-color: rgba($accent, 0.28);
+
+        box-shadow:
+            0 25px 70px rgba(0, 0, 0, 0.4),
+            0 0 45px rgba($accent, 0.035);
+    }
 
     &__body {
         display: flex;
-        min-height: 520px;
+        min-height: 540px;
     }
 
     &__footer {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1rem 1.5rem;
+
+        gap: 1rem;
+
+        padding: 1.25rem 1.5rem;
+
         border-top: 1px solid $border-color;
 
+        background: rgba(0, 0, 0, 0.12);
+
         .footer-info {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: $text-muted;
         }
     }
 }
 
-// ── Panels ────────────────────────────────────────────────────────────────────
+
+// ── Panels ────────────────────────────────────────────────────
+
 .panel-divider {
     width: 1px;
-    background-color: $border-color;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            $border-color 15%,
+            $border-color 85%,
+            transparent
+        );
+
     flex-shrink: 0;
 }
 
 .panel {
     flex: 1;
+
     display: flex;
     flex-direction: column;
+
     gap: 1rem;
-    padding: 1.5rem;
+
+    padding: 1.75rem;
 
     &__header {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+
+        gap: 0.65rem;
+
         margin-bottom: 0.25rem;
 
         h2 {
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 650;
+
             color: $text-primary;
+
             flex: 1;
+
+            margin: 0;
         }
     }
 
     &__icon {
+        width: 32px;
+        height: 32px;
+
         display: flex;
         align-items: center;
+        justify-content: center;
+
         color: $accent;
+
+        background: rgba($accent, 0.08);
+
+        border: 1px solid rgba($accent, 0.16);
+
+        border-radius: 0.55rem;
+
+        flex-shrink: 0;
     }
 
     &__textarea {
         flex: 1;
+
         width: 100%;
-        background-color: $bg-input;
+
+        box-sizing: border-box;
+
+        background: $bg-input;
+
         border: 1px solid $border-color;
-        border-radius: 0.5rem;
-        padding: 0.75rem 1rem;
+        border-radius: 0.7rem;
+
+        padding: 0.9rem 1rem;
+
         color: $text-primary;
+
         font-family: $font-stack;
         font-size: 0.875rem;
+
         resize: none;
         outline: none;
-        transition: border-color 0.2s;
-        line-height: 1.5;
+
+        transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease,
+            background-color 0.2s ease;
+
+        line-height: 1.6;
 
         &::placeholder {
             color: $text-muted;
         }
 
+        &:hover {
+            border-color: $border-hover;
+        }
+
         &:focus {
             border-color: $accent;
+
+            background: #0b1b21;
+
+            box-shadow:
+                0 0 0 3px rgba($accent, 0.08);
         }
 
         &--short {
             flex: unset;
-            height: 96px;
+            height: 105px;
         }
     }
 
@@ -150,144 +654,319 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
 
         .char-counter {
             position: absolute;
-            bottom: 2.25rem;
-            right: 2rem;
-            font-size: 0.75rem;
+
+            bottom: 2.4rem;
+            right: 2.25rem;
+
+            font-size: 0.7rem;
             color: $text-muted;
+
+            pointer-events: none;
         }
     }
 
     &--right {
-        gap: 0.75rem;
+        gap: 0.85rem;
     }
 }
 
-// ── Badges ────────────────────────────────────────────────────────────────────
+
+// ── Badges ────────────────────────────────────────────────────
+
 .badge {
-    font-size: 0.7rem;
-    font-weight: 600;
-    padding: 0.15rem 0.5rem;
-    border-radius: 0.3rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+
+    padding: 0.22rem 0.55rem;
+
+    border-radius: 999px;
+
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+
+    letter-spacing: 0.05em;
 
     &--required {
-        background-color: rgba($badge-required, 0.15);
-        color: $badge-required;
-        border: 1px solid rgba($badge-required, 0.3);
+        background: rgba($danger, 0.08);
+
+        color: $danger;
+
+        border: 1px solid rgba($danger, 0.22);
     }
 
     &--best {
-        background-color: rgba($badge-best, 0.15);
-        color: $badge-best;
-        border: 1px solid rgba($badge-best, 0.3);
+        background: rgba($accent, 0.08);
+
+        color: $accent;
+
+        border: 1px solid rgba($accent, 0.2);
     }
 }
 
-// ── Section Label ─────────────────────────────────────────────────────────────
+
+// ── Section Label ─────────────────────────────────────────────
+
 .section-label {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: $text-primary;
+
+    gap: 0.55rem;
+
+    font-size: 0.82rem;
+    font-weight: 600;
+
+    color: $text-secondary;
+
     margin-bottom: 0.25rem;
 }
 
-// ── Dropzone ──────────────────────────────────────────────────────────────────
+
+// ── Upload Section ────────────────────────────────────────────
+
 .upload-section {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+
+    gap: 0.6rem;
 }
 
+
+// ── Dropzone ──────────────────────────────────────────────────
+
 .dropzone {
+    min-height: 150px;
+
     display: flex;
     flex-direction: column;
+
     align-items: center;
     justify-content: center;
-    gap: 0.35rem;
+
+    gap: 0.4rem;
+
     padding: 1.5rem 1rem;
-    background-color: $bg-input;
-    border: 2px dashed $border-color;
-    border-radius: 0.6rem;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba($accent, 0.025),
+            rgba(255, 255, 255, 0.01)
+        ),
+        $bg-input;
+
+    border: 1.5px dashed $border-color;
+
+    border-radius: 0.8rem;
+
     cursor: pointer;
-    transition: border-color 0.2s, background-color 0.2s;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 
     &:hover {
         border-color: $accent;
-        background-color: rgba($accent, 0.05);
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba($accent, 0.07),
+                rgba($accent, 0.02)
+            ),
+            $bg-input;
+
+        box-shadow:
+            0 0 30px rgba($accent, 0.06);
+
+        transform: translateY(-1px);
     }
 
     &__icon {
+        width: 48px;
+        height: 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         color: $accent;
-        margin-bottom: 0.25rem;
+
+        background: rgba($accent, 0.07);
+
+        border: 1px solid rgba($accent, 0.15);
+
+        border-radius: 50%;
+
+        margin-bottom: 0.35rem;
     }
 
     &__title {
+        max-width: 90%;
+
         font-size: 0.875rem;
-        font-weight: 500;
+        font-weight: 600;
+
         color: $text-primary;
+
         margin: 0;
+
+        text-align: center;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     &__subtitle {
-        font-size: 0.75rem;
+        font-size: 0.72rem;
+
         color: $text-muted;
+
         margin: 0;
+
+        text-align: center;
     }
 }
 
-// ── OR Divider ────────────────────────────────────────────────────────────────
+
+// ── Selected Resume ──────────────────────────────────────────
+
+.remove-resume-btn {
+    margin-top: 0.35rem;
+
+    padding: 0.35rem 0.7rem;
+
+    background: rgba($danger, 0.07);
+
+    color: $danger;
+
+    border: 1px solid rgba($danger, 0.2);
+
+    border-radius: 0.4rem;
+
+    font-family: $font-stack;
+
+    font-size: 0.68rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+
+    &:hover {
+        background: rgba($danger, 0.12);
+
+        border-color: rgba($danger, 0.35);
+    }
+}
+
+
+// ── OR Divider ────────────────────────────────────────────────
+
 .or-divider {
     display: flex;
+
     align-items: center;
+
     gap: 0.75rem;
+
     color: $text-muted;
-    font-size: 0.75rem;
+
+    font-size: 0.68rem;
+
+    margin: 0.1rem 0;
 
     &::before,
     &::after {
         content: '';
+
         flex: 1;
+
         height: 1px;
-        background-color: $border-color;
+
+        background:
+            linear-gradient(
+                to right,
+                transparent,
+                $border-color
+            );
+    }
+
+    &::after {
+        background:
+            linear-gradient(
+                to left,
+                transparent,
+                $border-color
+            );
     }
 
     span {
         white-space: nowrap;
+
+        padding: 0.15rem 0.35rem;
+
+        border: 1px solid $border-color;
+
+        border-radius: 999px;
     }
 }
 
-// ── Self Description ──────────────────────────────────────────────────────────
+
+// ── Self Description ─────────────────────────────────────────
+
 .self-description {
     display: flex;
     flex-direction: column;
+
     gap: 0.5rem;
 }
 
-// ── Info Box ──────────────────────────────────────────────────────────────────
+
+// ── Info Box ──────────────────────────────────────────────────
+
 .info-box {
     display: flex;
+
     align-items: flex-start;
-    gap: 0.6rem;
-    padding: 0.75rem 1rem;
-    background-color: $info-bg;
+
+    gap: 0.65rem;
+
+    padding: 0.8rem 0.9rem;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba($accent, 0.06),
+            rgba($accent, 0.015)
+        ),
+        $info-bg;
+
     border: 1px solid $info-border;
-    border-radius: 0.5rem;
+
+    border-radius: 0.65rem;
 
     &__icon {
         flex-shrink: 0;
-        color: #4a90e2;
+
+        color: $accent;
+
         margin-top: 1px;
     }
 
     p {
         margin: 0;
-        font-size: 0.8rem;
-        color: #8ab4f8;
-        line-height: 1.5;
+
+        font-size: 0.75rem;
+
+        color: #9ac6cf;
+
+        line-height: 1.55;
 
         strong {
             color: $text-primary;
@@ -295,79 +974,320 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     }
 }
 
-// ── Generate Button ───────────────────────────────────────────────────────────
+
+// ── Generate Button ──────────────────────────────────────────
+
 .generate-btn {
     display: flex;
+
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, $accent 0%, darken($accent, 10%) 100%);
-    color: #fff;
-    font-size: 0.9rem;
-    font-weight: 600;
+    justify-content: center;
+
+    gap: 0.55rem;
+
+    padding: 0.78rem 1.4rem;
+
+    background:
+        linear-gradient(
+            135deg,
+            $accent 0%,
+            $accent-dark 100%
+        );
+
+    color: #021014;
+
+    font-size: 0.85rem;
+
+    font-weight: 750;
+
     border: none;
-    border-radius: 0.5rem;
+
+    border-radius: 0.6rem;
+
     cursor: pointer;
-    transition: opacity 0.2s, transform 0.1s;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+
     font-family: $font-stack;
 
+    box-shadow:
+        0 8px 24px rgba($accent, 0.12);
+
     &:hover {
-        opacity: 0.9;
+        box-shadow:
+            0 10px 30px rgba($accent, 0.2);
+
+        transform: translateY(-1px);
     }
 
     &:active {
-        transform: scale(0.98);
+        transform: translateY(0) scale(0.98);
+    }
+
+    &:disabled {
+        opacity: 0.35;
+
+        cursor: not-allowed;
+
+        box-shadow: none;
+
+        transform: none;
     }
 }
 
-.recent-reports{
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    width: 100%;
-    max-width: 900px;
 
-    .reports-list{
+// ── Recent Reports ────────────────────────────────────────────
+
+.recent-reports {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.9rem;
+
+    width: 100%;
+    max-width: 980px;
+
+    h2 {
+        font-size: 1.15rem;
+
+        margin: 0;
+
+        color: $text-primary;
+    }
+
+    .reports-list {
         display: flex;
-        gap: 0.75rem;
+
+        gap: 0.8rem;
+
         flex-wrap: wrap;
 
-        .report-item{
-            background-color: $bg-card;
+        padding: 0;
+        margin: 0;
+
+        list-style: none;
+
+        .report-item {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba($accent, 0.025),
+                    rgba(255, 255, 255, 0.01)
+                ),
+                $bg-card;
+
             border: 1px solid $border-color;
-            border-radius: 0.5rem;
+
+            border-radius: 0.7rem;
+
             padding: 1rem;
+
             flex: 1;
+
+            min-width: 220px;
+
             display: flex;
+
             flex-direction: column;
-            gap: 0.5rem;
+
+            gap: 0.45rem;
+
             cursor: pointer;
-            flex-shrink: 0;
+
+            transition:
+                border-color 0.2s ease,
+                transform 0.2s ease,
+                background-color 0.2s ease;
+
+            h3 {
+                margin: 0;
+
+                font-size: 0.9rem;
+
+                color: $text-primary;
+            }
+
+            .report-meta {
+                margin: 0;
+
+                font-size: 0.7rem;
+
+                color: $text-muted;
+            }
 
             .match-score {
-                font-size: 0.8rem;
-                font-weight: 600;
+                font-size: 0.75rem;
+
+                font-weight: 700;
+
                 color: $accent;
+
+                margin: 0;
+
                 align-items: flex-start;
+            }
+
+            &:hover {
+                border-color: rgba($accent, 0.4);
+
+                background: $bg-panel;
+
+                transform: translateY(-2px);
             }
         }
     }
 }
 
 
-// ── Page Footer ───────────────────────────────────────────────────────────────
+// ── Loading Screen ────────────────────────────────────────────
+
+.loading-screen {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: $bg-page;
+
+    color: $accent;
+
+    font-family: $font-stack;
+
+    h1 {
+        font-size: 1.2rem;
+
+        font-weight: 600;
+
+        animation: careerprep-pulse 1.5s ease-in-out infinite;
+    }
+}
+
+@keyframes careerprep-pulse {
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+// ── Page Footer ───────────────────────────────────────────────
+
 .page-footer {
     display: flex;
+
     gap: 1.5rem;
 
     a {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
+
         color: $text-muted;
+
         text-decoration: none;
-        transition: color 0.2s;
+
+        transition:
+            color 0.2s ease;
 
         &:hover {
-            color: $text-primary;
+            color: $accent;
         }
+    }
+}
+
+
+// ── Responsive Design ────────────────────────────────────────
+
+@media (max-width: 800px) {
+
+    .home-page {
+        padding: 2.5rem 1rem;
+    }
+
+    .interview-card {
+
+        &__body {
+            flex-direction: column;
+        }
+
+        &__footer {
+            flex-direction: column;
+            align-items: stretch;
+
+            .footer-info {
+                text-align: center;
+            }
+        }
+    }
+
+    .panel-divider {
+        width: 100%;
+        height: 1px;
+
+        background:
+            linear-gradient(
+                to right,
+                transparent,
+                $border-color 15%,
+                $border-color 85%,
+                transparent
+            );
+    }
+
+    .panel {
+        padding: 1.25rem;
+
+        min-height: 400px;
+    }
+
+    .panel--left {
+        min-height: 430px;
+    }
+
+    .generate-btn {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .home-page {
+        padding: 2rem 0.75rem;
+    }
+
+    .page-header {
+
+        h1 {
+            font-size: 1.8rem;
+        }
+
+        p {
+            font-size: 0.85rem;
+        }
+    }
+
+    .interview-card {
+        border-radius: 0.9rem;
+    }
+
+    .panel {
+        padding: 1rem;
+    }
+
+    .page-footer {
+        flex-wrap: wrap;
+        justify-content: center;
+
+        gap: 1rem;
     }
 }

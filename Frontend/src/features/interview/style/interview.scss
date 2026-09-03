@@ -1,101 +1,680 @@
-// ── Shared Variables (mirrors home.scss theme) ────────────────────────────────
-$bg-page: #0d1117;
-$bg-card: #161b22;
-$bg-panel: #1c2230;
-$bg-input: #1e2535;
-$border-color: #2a3348;
-$text-primary: #e6edf3;
-$text-muted: #7d8590;
-$accent: #ff2d78;
-$font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+// // ── Shared Variables (mirrors home.scss theme) ────────────────────────────────
+// $bg-page: #0d1117;
+// $bg-card: #161b22;
+// $bg-panel: #1c2230;
+// $bg-input: #1e2535;
+// $border-color: #2a3348;
+// $text-primary: #e6edf3;
+// $text-muted: #7d8590;
+// $accent: #ff2d78;
+// $font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-// severity palette
-$severity-high: #ff4d4d;
-$severity-medium: #f5a623;
-$severity-low: #3fb950;
+// // severity palette
+// $severity-high: #ff4d4d;
+// $severity-medium: #f5a623;
+// $severity-low: #3fb950;
+
+// *::-webkit-scrollbar {
+//     display: none;
+// }
+
+// // ── Page Shell ────────────────────────────────────────────────────────────────
+// .interview-page {
+//     width: 100%;
+//     min-height: 100vh;
+//     background-color: $bg-page;
+//     color: $text-primary;
+//     font-family: $font-stack;
+//     display: flex;
+//     align-items: stretch;
+//     padding: 1.5rem;
+//     box-sizing: border-box;
+// }
+
+// // ── 3-Column Layout ───────────────────────────────────────────────────────────
+// .interview-layout {
+//     display: flex;
+//     width: 100%;
+//     max-width: 1280px;
+//     margin: 0 auto;
+//     background-color: $bg-card;
+//     border: 1px solid $border-color;
+//     border-radius: 1rem;
+//     justify-content: space-between;
+// }
+
+// .interview-divider {
+//     width: 1px;
+//     background-color: $border-color;
+//     flex-shrink: 0;
+// }
+
+// // ── Left Nav ─────────────────────────────────────────────────────────────────
+// .interview-nav {
+//     width: 220px;
+//     flex-shrink: 0;
+//     padding: 1.75rem 1rem;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     gap: 0.25rem;
+
+
+
+
+//     &__label {
+//         font-size: 0.7rem;
+//         font-weight: 600;
+//         text-transform: uppercase;
+//         letter-spacing: 0.08em;
+//         color: $text-muted;
+//         padding: 0 0.75rem;
+//         margin-bottom: 0.5rem;
+//     }
+
+//     &__item {
+//         display: flex;
+//         align-items: center;
+//         gap: 0.6rem;
+//         width: 100%;
+//         padding: 0.65rem 0.75rem;
+//         background: none;
+//         border: none;
+//         border-radius: 0.5rem;
+//         color: $text-muted;
+//         font-family: $font-stack;
+//         font-size: 0.875rem;
+//         cursor: pointer;
+//         text-align: left;
+//         transition: background-color 0.15s, color 0.15s;
+
+//         &:hover {
+//             background-color: $bg-panel;
+//             color: $text-primary;
+//         }
+
+//         &--active {
+//             background-color: rgba($accent, 0.1);
+//             color: $accent;
+
+//             .interview-nav__icon svg {
+//                 stroke: $accent;
+//             }
+//         }
+//     }
+
+//     &__icon {
+//         display: flex;
+//         align-items: center;
+//         flex-shrink: 0;
+//     }
+// }
+
+// // ── Center Content ────────────────────────────────────────────────────────────
+// .interview-content {
+//     flex: 1;
+//     padding: 1.75rem 2rem;
+//     overflow-y: auto;
+//     min-height: initial;
+//     max-height: calc(100vh - 3rem);
+//     padding-bottom: 5rem;
+//     align-items: flex-start;
+
+
+
+
+
+
+
+
+//     section {
+//         min-height: 100%;
+//     }
+// }
+
+// .content-header {
+//     display: flex;
+//     align-items: baseline;
+//     gap: 0.75rem;
+//     margin-bottom: 1.5rem;
+//     padding-bottom: 1rem;
+//     border-bottom: 1px solid $border-color;
+
+//     h2 {
+//         font-size: 1.1rem;
+//         font-weight: 700;
+//         color: $text-primary;
+//         margin: 0;
+//     }
+
+//     &__count {
+//         font-size: 0.8rem;
+//         color: $text-muted;
+//         background-color: $bg-panel;
+//         padding: 0.15rem 0.6rem;
+//         border-radius: 2rem;
+//         border: 1px solid $border-color;
+//     }
+// }
+
+// // ── Question Cards ────────────────────────────────────────────────────────────
+// .q-list {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.75rem;
+// }
+
+// .q-card {
+//     background-color: $bg-panel;
+//     border: 1px solid $border-color;
+//     border-radius: 0.6rem;
+//     overflow: hidden;
+//     transition: border-color 0.2s;
+
+//     &:hover {
+//         border-color: lighten($border-color, 8%);
+//     }
+
+//     &__header {
+//         display: flex;
+//         align-items: flex-start;
+//         gap: 0.75rem;
+//         padding: 0.9rem 1rem;
+//         cursor: pointer;
+//         user-select: none;
+//     }
+
+//     &__index {
+//         flex-shrink: 0;
+//         font-size: 0.7rem;
+//         font-weight: 700;
+//         color: $accent;
+//         background-color: rgba($accent, 0.1);
+//         border: 1px solid rgba($accent, 0.2);
+//         border-radius: 0.3rem;
+//         padding: 0.15rem 0.4rem;
+//         margin-top: 2px;
+//     }
+
+//     &__question {
+//         flex: 1;
+//         margin: 0;
+//         font-size: 0.9rem;
+//         font-weight: 500;
+//         color: $text-primary;
+//         line-height: 1.5;
+//     }
+
+//     &__chevron {
+//         flex-shrink: 0;
+//         color: $text-muted;
+//         transition: transform 0.2s;
+//         margin-top: 2px;
+
+//         &--open {
+//             transform: rotate(180deg);
+//             color: $accent;
+//         }
+//     }
+
+//     &__body {
+//         padding: 0 1rem 1rem;
+//         display: flex;
+//         flex-direction: column;
+//         gap: 0.75rem;
+//         border-top: 1px solid $border-color;
+//         padding-top: 0.75rem;
+//     }
+
+//     &__section {
+//         display: flex;
+//         flex-direction: column;
+//         gap: 0.4rem;
+
+//         p {
+//             margin: 0;
+//             font-size: 0.835rem;
+//             color: lighten($text-muted, 15%);
+//             line-height: 1.6;
+//         }
+//     }
+
+//     &__tag {
+//         font-size: 0.68rem;
+//         font-weight: 700;
+//         text-transform: uppercase;
+//         letter-spacing: 0.06em;
+//         padding: 0.15rem 0.5rem;
+//         border-radius: 0.25rem;
+//         width: fit-content;
+
+//         &--intention {
+//             color: #a78bfa;
+//             background-color: rgba(#a78bfa, 0.1);
+//             border: 1px solid rgba(#a78bfa, 0.2);
+//         }
+
+//         &--answer {
+//             color: #3fb950;
+//             background-color: rgba(#3fb950, 0.1);
+//             border: 1px solid rgba(#3fb950, 0.2);
+//         }
+//     }
+// }
+
+// // ── Road Map ──────────────────────────────────────────────────────────────────
+// .roadmap-list {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0;
+//     position: relative;
+
+//     // vertical timeline line
+//     &::before {
+//         content: '';
+//         position: absolute;
+//         left: 28px;
+//         top: 0;
+//         bottom: 0;
+//         width: 2px;
+//         background: linear-gradient(to bottom, $accent, rgba($accent, 0.1));
+//         border-radius: 1px;
+//     }
+// }
+
+// .roadmap-day {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.5rem;
+//     padding: 0.75rem 0 0.75rem 3.5rem;
+//     position: relative;
+
+//     // dot on timeline
+//     &::before {
+//         content: '';
+//         position: absolute;
+//         left: 21px;
+//         top: 1.05rem;
+//         width: 14px;
+//         height: 14px;
+//         border-radius: 50%;
+//         background-color: $bg-card;
+//         border: 2px solid $accent;
+//     }
+
+//     &__header {
+//         display: flex;
+//         align-items: center;
+//         gap: 0.6rem;
+//     }
+
+//     &__badge {
+//         font-size: 0.7rem;
+//         font-weight: 700;
+//         color: $accent;
+//         background-color: rgba($accent, 0.1);
+//         border: 1px solid rgba($accent, 0.25);
+//         padding: 0.1rem 0.5rem;
+//         border-radius: 2rem;
+//     }
+
+//     &__focus {
+//         margin: 0;
+//         font-size: 0.95rem;
+//         font-weight: 600;
+//         color: $text-primary;
+//     }
+
+//     &__tasks {
+//         list-style: none;
+//         margin: 0;
+//         padding: 0;
+//         display: flex;
+//         flex-direction: column;
+//         gap: 0.35rem;
+
+//         li {
+//             display: flex;
+//             align-items: flex-start;
+//             gap: 0.5rem;
+//             font-size: 0.845rem;
+//             color: lighten($text-muted, 12%);
+//             line-height: 1.5;
+//         }
+//     }
+
+//     &__bullet {
+//         flex-shrink: 0;
+//         width: 5px;
+//         height: 5px;
+//         border-radius: 50%;
+//         background-color: $text-muted;
+//         margin-top: 8px;
+//     }
+// }
+
+// // ── Right Sidebar ─────────────────────────────────────────────────────────────
+// .interview-sidebar {
+//     width: 240px;
+//     flex-shrink: 0;
+//     padding: 1.75rem 1.25rem;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 1.25rem;
+// }
+
+// .sidebar-divider {
+//     height: 1px;
+//     background-color: $border-color;
+// }
+
+// // Match Score
+// .match-score {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     gap: 0.6rem;
+
+//     &__label {
+//         font-size: 0.75rem;
+//         font-weight: 600;
+//         text-transform: uppercase;
+//         letter-spacing: 0.08em;
+//         color: $text-muted;
+//         margin: 0;
+//         align-self: flex-start;
+//     }
+
+//     &__ring {
+//         width: 90px;
+//         height: 90px;
+//         border-radius: 50%;
+//         display: flex;
+//         flex-direction: column;
+//         align-items: center;
+//         justify-content: center;
+//         border: 4px solid;
+
+//         &.score--high {
+//             border-color: $severity-low;
+//         }
+
+//         &.score--mid {
+//             border-color: $severity-medium;
+//         }
+
+//         &.score--low {
+//             border-color: $severity-high;
+//         }
+//     }
+
+//     &__value {
+//         font-size: 1.6rem;
+//         font-weight: 800;
+//         color: $text-primary;
+//         line-height: 1;
+//     }
+
+//     &__pct {
+//         font-size: 0.75rem;
+//         color: $text-muted;
+//         margin-top: -2px;
+//     }
+
+//     &__sub {
+//         margin: 0;
+//         font-size: 0.75rem;
+//         color: $severity-low;
+//         text-align: center;
+//     }
+// }
+
+// // Skill Gaps
+// .skill-gaps {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.75rem;
+
+//     &__label {
+//         font-size: 0.75rem;
+//         font-weight: 600;
+//         text-transform: uppercase;
+//         letter-spacing: 0.08em;
+//         color: $text-muted;
+//         margin: 0;
+//     }
+
+//     &__list {
+//         display: flex;
+//         flex-wrap: wrap;
+//         gap: 0.5rem;
+//     }
+// }
+
+// .skill-tag {
+//     font-size: 0.775rem;
+//     font-weight: 500;
+//     padding: 0.3rem 0.7rem;
+//     border-radius: 0.4rem;
+//     border: 1px solid;
+//     cursor: default;
+
+//     &--high {
+//         color: $severity-high;
+//         background-color: rgba($severity-high, 0.1);
+//         border-color: rgba($severity-high, 0.25);
+//     }
+
+//     &--medium {
+//         color: $severity-medium;
+//         background-color: rgba($severity-medium, 0.1);
+//         border-color: rgba($severity-medium, 0.25);
+//     }
+
+//     &--low {
+//         color: $severity-low;
+//         background-color: rgba($severity-low, 0.1);
+//         border-color: rgba($severity-low, 0.25);
+//     }
+// }
+
+
+// ─────────────────────────────────────────────────────────────
+// CareerPrep AI — Interview Page Theme
+// ─────────────────────────────────────────────────────────────
+
+$bg-page: #071014;
+$bg-card: #0d1a20;
+$bg-panel: #101f26;
+$bg-input: #0a171c;
+
+$border-color: #1d3942;
+$border-hover: #285762;
+
+$text-primary: #e8f7fa;
+$text-secondary: #b3cbd1;
+$text-muted: #718b93;
+
+$accent: #00e5ff;
+$accent-dark: #00a8bd;
+$accent-light: #67efff;
+
+$severity-high: #ff647c;
+$severity-medium: #ffb84d;
+$severity-low: #2ee6a6;
+
+$font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, sans-serif;
+
+
+// ─────────────────────────────────────────────────────────────
+// Global
+// ─────────────────────────────────────────────────────────────
 
 *::-webkit-scrollbar {
-    display: none;
+    width: 5px;
+    height: 5px;
 }
 
-// ── Page Shell ────────────────────────────────────────────────────────────────
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: $border-color;
+    border-radius: 10px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+// ─────────────────────────────────────────────────────────────
+// Page Shell
+// ─────────────────────────────────────────────────────────────
+
 .interview-page {
     width: 100%;
     min-height: 100vh;
-    background-color: $bg-page;
+    background: $bg-page;
     color: $text-primary;
     font-family: $font-stack;
     display: flex;
     align-items: stretch;
     padding: 1.5rem;
-    box-sizing: border-box;
 }
 
-// ── 3-Column Layout ───────────────────────────────────────────────────────────
+
+// ─────────────────────────────────────────────────────────────
+// Main 3-Column Layout
+// ─────────────────────────────────────────────────────────────
+
 .interview-layout {
     display: flex;
     width: 100%;
     max-width: 1280px;
+    min-height: calc(100vh - 3rem);
     margin: 0 auto;
-    background-color: $bg-card;
+
+    background: $bg-card;
+
     border: 1px solid $border-color;
     border-radius: 1rem;
-    justify-content: space-between;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba($accent, 0.02);
 }
+
+
+// ─────────────────────────────────────────────────────────────
+// Dividers
+// ─────────────────────────────────────────────────────────────
 
 .interview-divider {
     width: 1px;
-    background-color: $border-color;
+    background: $border-color;
     flex-shrink: 0;
 }
 
-// ── Left Nav ─────────────────────────────────────────────────────────────────
+.sidebar-divider {
+    width: 100%;
+    height: 1px;
+    background: $border-color;
+}
+
+
+// ─────────────────────────────────────────────────────────────
+// Left Navigation
+// ─────────────────────────────────────────────────────────────
+
 .interview-nav {
     width: 220px;
     flex-shrink: 0;
+
     padding: 1.75rem 1rem;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 0.25rem;
+
+    gap: 1rem;
+
+    background: rgba(7, 16, 20, 0.35);
 
 
+    .nav-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
 
 
     &__label {
         font-size: 0.7rem;
-        font-weight: 600;
+        font-weight: 700;
+
         text-transform: uppercase;
         letter-spacing: 0.08em;
+
         color: $text-muted;
+
         padding: 0 0.75rem;
-        margin-bottom: 0.5rem;
+        margin: 0 0 0.5rem;
     }
+
 
     &__item {
         display: flex;
         align-items: center;
+
         gap: 0.6rem;
+
         width: 100%;
-        padding: 0.65rem 0.75rem;
-        background: none;
-        border: none;
-        border-radius: 0.5rem;
+
+        padding: 0.7rem 0.75rem;
+
+        background: transparent;
+
+        border: 1px solid transparent;
+        border-radius: 0.55rem;
+
         color: $text-muted;
+
         font-family: $font-stack;
         font-size: 0.875rem;
+        font-weight: 500;
+
         cursor: pointer;
         text-align: left;
-        transition: background-color 0.15s, color 0.15s;
+
+        transition:
+            background-color 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.2s ease;
+
 
         &:hover {
-            background-color: $bg-panel;
+            background: $bg-panel;
+            border-color: $border-color;
             color: $text-primary;
         }
 
+
         &--active {
-            background-color: rgba($accent, 0.1);
+            background: rgba($accent, 0.08);
+            border-color: rgba($accent, 0.18);
+
             color: $accent;
+
+            box-shadow:
+                inset 3px 0 0 $accent,
+                0 0 20px rgba($accent, 0.04);
+
 
             .interview-nav__icon svg {
                 stroke: $accent;
@@ -103,113 +682,233 @@ $severity-low: #3fb950;
         }
     }
 
+
     &__icon {
         display: flex;
         align-items: center;
+        justify-content: center;
+
+        width: 18px;
+        height: 18px;
+
         flex-shrink: 0;
     }
 }
 
-// ── Center Content ────────────────────────────────────────────────────────────
-.interview-content {
-    flex: 1;
-    padding: 1.75rem 2rem;
-    overflow-y: auto;
-    min-height: initial;
-    max-height: calc(100vh - 3rem);
-    padding-bottom: 5rem;
-    align-items: flex-start;
+
+// ─────────────────────────────────────────────────────────────
+// Download Resume Button
+// ─────────────────────────────────────────────────────────────
+
+.button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 0.55rem;
+
+    font-family: $font-stack;
+    font-size: 0.82rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
 
 
+.primary-button {
+    padding: 0.75rem 0.9rem;
+
+    color: #031114;
+    background: $accent;
+
+    box-shadow: 0 0 20px rgba($accent, 0.08);
 
 
+    &:hover {
+        background: $accent-light;
+
+        box-shadow:
+            0 0 24px rgba($accent, 0.18);
+
+        transform: translateY(-1px);
+    }
 
 
-
-
-    section {
-        min-height: 100%;
+    &:active {
+        transform: translateY(0);
     }
 }
 
+
+// ─────────────────────────────────────────────────────────────
+// Center Content
+// ─────────────────────────────────────────────────────────────
+
+.interview-content {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 1.75rem 2rem 5rem;
+
+    overflow-y: auto;
+
+    max-height: calc(100vh - 3rem);
+}
+
+
+.interview-content section {
+    min-height: 100%;
+}
+
+
+// ─────────────────────────────────────────────────────────────
+// Content Header
+// ─────────────────────────────────────────────────────────────
+
 .content-header {
     display: flex;
-    align-items: baseline;
+    align-items: center;
+
     gap: 0.75rem;
+
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
+
     border-bottom: 1px solid $border-color;
 
+
     h2 {
-        font-size: 1.1rem;
-        font-weight: 700;
+        font-size: 1.15rem;
+        font-weight: 750;
+
         color: $text-primary;
+
         margin: 0;
     }
 
+
     &__count {
-        font-size: 0.8rem;
+        font-size: 0.78rem;
+        font-weight: 500;
+
         color: $text-muted;
-        background-color: $bg-panel;
-        padding: 0.15rem 0.6rem;
+
+        background: $bg-panel;
+
+        padding: 0.2rem 0.65rem;
+
         border-radius: 2rem;
+
         border: 1px solid $border-color;
     }
 }
 
-// ── Question Cards ────────────────────────────────────────────────────────────
+
+// ─────────────────────────────────────────────────────────────
+// Question List
+// ─────────────────────────────────────────────────────────────
+
 .q-list {
     display: flex;
     flex-direction: column;
+
     gap: 0.75rem;
 }
 
+
+// ─────────────────────────────────────────────────────────────
+// Question Card
+// ─────────────────────────────────────────────────────────────
+
 .q-card {
-    background-color: $bg-panel;
+    background: $bg-panel;
+
     border: 1px solid $border-color;
-    border-radius: 0.6rem;
+    border-radius: 0.65rem;
+
     overflow: hidden;
-    transition: border-color 0.2s;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+
 
     &:hover {
-        border-color: lighten($border-color, 8%);
+        border-color: $border-hover;
+
+        box-shadow:
+            0 8px 24px rgba(0, 0, 0, 0.15);
     }
+
 
     &__header {
         display: flex;
         align-items: flex-start;
+
         gap: 0.75rem;
-        padding: 0.9rem 1rem;
+
+        padding: 0.95rem 1rem;
+
         cursor: pointer;
         user-select: none;
     }
 
+
     &__index {
         flex-shrink: 0;
+
         font-size: 0.7rem;
-        font-weight: 700;
+        font-weight: 800;
+
         color: $accent;
-        background-color: rgba($accent, 0.1);
+
+        background: rgba($accent, 0.08);
+
         border: 1px solid rgba($accent, 0.2);
+
         border-radius: 0.3rem;
+
         padding: 0.15rem 0.4rem;
+
         margin-top: 2px;
     }
+
 
     &__question {
         flex: 1;
+
         margin: 0;
+
         font-size: 0.9rem;
-        font-weight: 500;
+        font-weight: 550;
+
         color: $text-primary;
-        line-height: 1.5;
+
+        line-height: 1.55;
     }
+
 
     &__chevron {
         flex-shrink: 0;
+
         color: $text-muted;
-        transition: transform 0.2s;
+
+        transition:
+            transform 0.2s ease,
+            color 0.2s ease;
+
         margin-top: 2px;
+
 
         &--open {
             transform: rotate(180deg);
@@ -217,263 +916,692 @@ $severity-low: #3fb950;
         }
     }
 
+
     &__body {
         padding: 0 1rem 1rem;
+
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+
+        gap: 0.9rem;
+
         border-top: 1px solid $border-color;
-        padding-top: 0.75rem;
+
+        padding-top: 0.85rem;
     }
+
 
     &__section {
         display: flex;
         flex-direction: column;
+
         gap: 0.4rem;
+
 
         p {
             margin: 0;
-            font-size: 0.835rem;
-            color: lighten($text-muted, 15%);
-            line-height: 1.6;
+
+            font-size: 0.84rem;
+
+            color: $text-secondary;
+
+            line-height: 1.65;
         }
     }
 
+
     &__tag {
-        font-size: 0.68rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        padding: 0.15rem 0.5rem;
-        border-radius: 0.25rem;
         width: fit-content;
 
+        font-size: 0.67rem;
+        font-weight: 750;
+
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+
+        padding: 0.17rem 0.55rem;
+
+        border-radius: 0.25rem;
+
+
         &--intention {
-            color: #a78bfa;
-            background-color: rgba(#a78bfa, 0.1);
-            border: 1px solid rgba(#a78bfa, 0.2);
+            color: #b69cff;
+
+            background: rgba(182, 156, 255, 0.08);
+
+            border: 1px solid rgba(182, 156, 255, 0.2);
         }
 
+
         &--answer {
-            color: #3fb950;
-            background-color: rgba(#3fb950, 0.1);
-            border: 1px solid rgba(#3fb950, 0.2);
+            color: $severity-low;
+
+            background: rgba($severity-low, 0.08);
+
+            border: 1px solid rgba($severity-low, 0.2);
         }
     }
 }
 
-// ── Road Map ──────────────────────────────────────────────────────────────────
+
+// ─────────────────────────────────────────────────────────────
+// Road Map
+// ─────────────────────────────────────────────────────────────
+
 .roadmap-list {
     display: flex;
     flex-direction: column;
+
     gap: 0;
+
     position: relative;
 
-    // vertical timeline line
+
     &::before {
         content: '';
+
         position: absolute;
+
         left: 28px;
         top: 0;
         bottom: 0;
+
         width: 2px;
-        background: linear-gradient(to bottom, $accent, rgba($accent, 0.1));
+
+        background: linear-gradient(
+            to bottom,
+            $accent,
+            rgba($accent, 0.08)
+        );
+
         border-radius: 1px;
     }
 }
 
+
 .roadmap-day {
     display: flex;
     flex-direction: column;
+
     gap: 0.5rem;
-    padding: 0.75rem 0 0.75rem 3.5rem;
+
+    padding: 0.8rem 0 0.8rem 3.5rem;
+
     position: relative;
 
-    // dot on timeline
+
     &::before {
         content: '';
+
         position: absolute;
+
         left: 21px;
-        top: 1.05rem;
+        top: 1.1rem;
+
         width: 14px;
         height: 14px;
+
         border-radius: 50%;
-        background-color: $bg-card;
+
+        background: $bg-card;
+
         border: 2px solid $accent;
+
+        box-shadow:
+            0 0 0 3px rgba($accent, 0.05),
+            0 0 14px rgba($accent, 0.08);
     }
+
 
     &__header {
         display: flex;
         align-items: center;
+
         gap: 0.6rem;
     }
 
+
     &__badge {
         font-size: 0.7rem;
-        font-weight: 700;
+        font-weight: 750;
+
         color: $accent;
-        background-color: rgba($accent, 0.1);
-        border: 1px solid rgba($accent, 0.25);
-        padding: 0.1rem 0.5rem;
+
+        background: rgba($accent, 0.08);
+
+        border: 1px solid rgba($accent, 0.22);
+
+        padding: 0.12rem 0.55rem;
+
         border-radius: 2rem;
     }
 
+
     &__focus {
         margin: 0;
+
         font-size: 0.95rem;
-        font-weight: 600;
+        font-weight: 650;
+
         color: $text-primary;
     }
 
+
     &__tasks {
         list-style: none;
+
         margin: 0;
         padding: 0;
+
         display: flex;
         flex-direction: column;
-        gap: 0.35rem;
+
+        gap: 0.4rem;
+
 
         li {
             display: flex;
             align-items: flex-start;
+
             gap: 0.5rem;
+
             font-size: 0.845rem;
-            color: lighten($text-muted, 12%);
-            line-height: 1.5;
+
+            color: $text-secondary;
+
+            line-height: 1.55;
         }
     }
+
 
     &__bullet {
         flex-shrink: 0;
+
         width: 5px;
         height: 5px;
-        border-radius: 50%;
-        background-color: $text-muted;
+
         margin-top: 8px;
+
+        border-radius: 50%;
+
+        background: $accent;
+
+        opacity: 0.7;
     }
 }
 
-// ── Right Sidebar ─────────────────────────────────────────────────────────────
+
+// ─────────────────────────────────────────────────────────────
+// Right Sidebar
+// ─────────────────────────────────────────────────────────────
+
 .interview-sidebar {
     width: 240px;
+
     flex-shrink: 0;
+
     padding: 1.75rem 1.25rem;
+
     display: flex;
     flex-direction: column;
+
     gap: 1.25rem;
+
+    background: rgba(7, 16, 20, 0.25);
 }
 
-.sidebar-divider {
-    height: 1px;
-    background-color: $border-color;
-}
 
+// ─────────────────────────────────────────────────────────────
 // Match Score
+// ─────────────────────────────────────────────────────────────
+
 .match-score {
     display: flex;
     flex-direction: column;
+
     align-items: center;
-    gap: 0.6rem;
+
+    gap: 0.65rem;
+
 
     &__label {
-        font-size: 0.75rem;
-        font-weight: 600;
+        width: 100%;
+
+        font-size: 0.72rem;
+        font-weight: 700;
+
         text-transform: uppercase;
         letter-spacing: 0.08em;
+
         color: $text-muted;
+
         margin: 0;
-        align-self: flex-start;
     }
 
+
     &__ring {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
+
         border-radius: 50%;
+
         display: flex;
         flex-direction: column;
+
         align-items: center;
         justify-content: center;
+
         border: 4px solid;
+
+        position: relative;
+
+        background: $bg-panel;
+
+
+        &::after {
+            content: '';
+
+            position: absolute;
+
+            inset: 5px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255, 255, 255, 0.04);
+
+            pointer-events: none;
+        }
+
 
         &.score--high {
             border-color: $severity-low;
+
+            box-shadow:
+                0 0 24px rgba($severity-low, 0.08);
         }
+
 
         &.score--mid {
             border-color: $severity-medium;
+
+            box-shadow:
+                0 0 24px rgba($severity-medium, 0.08);
         }
+
 
         &.score--low {
             border-color: $severity-high;
+
+            box-shadow:
+                0 0 24px rgba($severity-high, 0.08);
         }
     }
 
+
     &__value {
-        font-size: 1.6rem;
-        font-weight: 800;
+        font-size: 1.7rem;
+        font-weight: 850;
+
         color: $text-primary;
+
         line-height: 1;
     }
 
+
     &__pct {
         font-size: 0.75rem;
+
         color: $text-muted;
-        margin-top: -2px;
+
+        margin-top: 3px;
     }
+
 
     &__sub {
         margin: 0;
+
         font-size: 0.75rem;
+
         color: $severity-low;
+
         text-align: center;
+
+        line-height: 1.4;
     }
 }
 
+
+// ─────────────────────────────────────────────────────────────
 // Skill Gaps
+// ─────────────────────────────────────────────────────────────
+
 .skill-gaps {
     display: flex;
     flex-direction: column;
+
     gap: 0.75rem;
 
+
     &__label {
-        font-size: 0.75rem;
-        font-weight: 600;
+        font-size: 0.72rem;
+        font-weight: 700;
+
         text-transform: uppercase;
         letter-spacing: 0.08em;
+
         color: $text-muted;
+
         margin: 0;
     }
+
 
     &__list {
         display: flex;
         flex-wrap: wrap;
+
         gap: 0.5rem;
     }
 }
 
+
 .skill-tag {
     font-size: 0.775rem;
-    font-weight: 500;
+    font-weight: 550;
+
     padding: 0.3rem 0.7rem;
+
     border-radius: 0.4rem;
+
     border: 1px solid;
+
     cursor: default;
+
 
     &--high {
         color: $severity-high;
-        background-color: rgba($severity-high, 0.1);
+
+        background: rgba($severity-high, 0.08);
+
         border-color: rgba($severity-high, 0.25);
     }
 
+
     &--medium {
         color: $severity-medium;
-        background-color: rgba($severity-medium, 0.1);
+
+        background: rgba($severity-medium, 0.08);
+
         border-color: rgba($severity-medium, 0.25);
     }
 
+
     &--low {
         color: $severity-low;
-        background-color: rgba($severity-low, 0.1);
+
+        background: rgba($severity-low, 0.08);
+
         border-color: rgba($severity-low, 0.25);
+    }
+}
+
+
+// ─────────────────────────────────────────────────────────────
+// Loading Screen
+// ─────────────────────────────────────────────────────────────
+
+.loading-screen {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 1rem;
+
+    background: $bg-page;
+
+    color: $text-primary;
+
+    font-family: $font-stack;
+
+
+    h1 {
+        margin: 0;
+
+        font-size: 1.15rem;
+        font-weight: 650;
+
+        color: $text-primary;
+    }
+
+
+    &::after {
+        content: '';
+
+        width: 28px;
+        height: 28px;
+
+        border: 3px solid $border-color;
+
+        border-top-color: $accent;
+
+        border-radius: 50%;
+
+        animation: interview-spin 0.8s linear infinite;
+    }
+}
+
+
+@keyframes interview-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+// ─────────────────────────────────────────────────────────────
+// Responsive — Tablet
+// ─────────────────────────────────────────────────────────────
+
+@media (max-width: 1050px) {
+
+    .interview-page {
+        padding: 1rem;
+    }
+
+
+    .interview-nav {
+        width: 190px;
+    }
+
+
+    .interview-sidebar {
+        width: 210px;
+    }
+
+
+    .interview-content {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+
+// ─────────────────────────────────────────────────────────────
+// Responsive — Mobile
+// ─────────────────────────────────────────────────────────────
+
+@media (max-width: 800px) {
+
+    .interview-page {
+        padding: 0;
+    }
+
+
+    .interview-layout {
+        min-height: 100vh;
+
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+
+        flex-direction: column;
+    }
+
+
+    .interview-divider {
+        width: 100%;
+        height: 1px;
+    }
+
+
+    .interview-nav {
+        width: 100%;
+
+        padding: 1rem;
+
+        gap: 1rem;
+    }
+
+
+    .nav-content {
+        width: 100%;
+    }
+
+
+    .interview-nav__label {
+        padding-left: 0.5rem;
+    }
+
+
+    .interview-nav__item {
+        width: 100%;
+    }
+
+
+    .interview-content {
+        width: 100%;
+
+        max-height: none;
+
+        padding: 1.25rem 1rem 3rem;
+
+        overflow: visible;
+    }
+
+
+    .interview-sidebar {
+        width: 100%;
+
+        padding: 1.25rem 1rem 1.5rem;
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        align-items: start;
+    }
+
+
+    .interview-sidebar .sidebar-divider {
+        grid-column: 1 / -1;
+    }
+
+
+    .match-score {
+        align-items: center;
+    }
+
+
+    .match-score__label {
+        text-align: center;
+    }
+
+
+    .skill-gaps__list {
+        justify-content: flex-start;
+    }
+}
+
+
+// ─────────────────────────────────────────────────────────────
+// Responsive — Small Mobile
+// ─────────────────────────────────────────────────────────────
+
+@media (max-width: 520px) {
+
+    .interview-nav {
+        padding: 0.85rem;
+    }
+
+
+    .interview-nav__item {
+        font-size: 0.8rem;
+
+        padding: 0.6rem;
+    }
+
+
+    .interview-content {
+        padding: 1rem 0.75rem 2.5rem;
+    }
+
+
+    .content-header {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 0.5rem;
+    }
+
+
+    .content-header h2 {
+        font-size: 1rem;
+    }
+
+
+    .q-card__header {
+        padding: 0.8rem;
+    }
+
+
+    .q-card__question {
+        font-size: 0.84rem;
+    }
+
+
+    .q-card__body {
+        padding-left: 0.8rem;
+        padding-right: 0.8rem;
+    }
+
+
+    .roadmap-day {
+        padding-left: 2.8rem;
+    }
+
+
+    .roadmap-list::before {
+        left: 21px;
+    }
+
+
+    .roadmap-day::before {
+        left: 14px;
+    }
+
+
+    .interview-sidebar {
+        grid-template-columns: 1fr;
+
+        gap: 1rem;
+    }
+
+
+    .interview-sidebar .sidebar-divider {
+        display: none;
     }
 }
