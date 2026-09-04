@@ -142,13 +142,13 @@ const interviewReportSchema = z.object({
                 intention: z
                     .string()
                     .describe(
-                        "The intention of interviewer behind asking this question"
+                        "The intention of the interviewer behind asking this question"
                     ),
 
                 answer: z
                     .string()
                     .describe(
-                        "How to answer this question, what points to cover, what approach to take etc."
+                        "How to answer this question, what points to cover, what approach to take"
                     ),
             })
         )
@@ -166,13 +166,13 @@ const interviewReportSchema = z.object({
                 intention: z
                     .string()
                     .describe(
-                        "The intention of interviewer behind asking this question"
+                        "The intention of the interviewer behind asking this question"
                     ),
 
                 answer: z
                     .string()
                     .describe(
-                        "How to answer this question, what points to cover, what approach to take etc."
+                        "How to answer this question, what points to cover, what approach to take"
                     ),
             })
         )
@@ -190,7 +190,7 @@ const interviewReportSchema = z.object({
                 severity: z
                     .enum(["low", "medium", "high"])
                     .describe(
-                        "The severity of this skill gap, i.e. how important is this skill for the job and how much it can impact the candidate's chances"
+                        "The severity of this skill gap and its impact on the candidate's chances"
                     ),
             })
         )
@@ -203,25 +203,23 @@ const interviewReportSchema = z.object({
             z.object({
                 day: z
                     .number()
-                    .describe(
-                        "The day number in the preparation plan, starting from 1"
-                    ),
+                    .describe("The day number in the preparation plan, starting from 1"),
 
                 focus: z
                     .string()
                     .describe(
-                        "The main focus of this day in the preparation plan, e.g. data structures, system design, mock interviews etc."
+                        "The main focus of this day, e.g. data structures, system design, mock interviews"
                     ),
 
                 tasks: z
                     .array(z.string())
                     .describe(
-                        "List of tasks to be done on this day to follow the preparation plan"
+                        "List of tasks to be completed on this day"
                     ),
             })
         )
         .describe(
-            "A day-wise preparation plan for the candidate to follow in order to prepare for the interview effectively"
+            "A day-wise preparation plan for the candidate"
         ),
 
     title: z
@@ -230,11 +228,6 @@ const interviewReportSchema = z.object({
             "The title of the job for which the interview report is generated"
         ),
 });
-
-
-// ============================================================
-// GENERATE INTERVIEW REPORT
-// ============================================================
 
 async function generateInterviewReport({
     resume,
@@ -257,6 +250,7 @@ ${jobDescription}
     const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
         contents: prompt,
+
         config: {
             responseMimeType: "application/json",
             responseSchema: zodToJsonSchema(interviewReportSchema),
@@ -266,35 +260,21 @@ ${jobDescription}
     return JSON.parse(response.text);
 }
 
-
-// ============================================================
-// GENERATE PDF FROM HTML
-// ============================================================
-
 async function generatePdfFromHtml(htmlContent) {
-    console.log("Starting Puppeteer PDF generation...");
-
-    console.log(
-        "Puppeteer executable path:",
-        puppeteer.executablePath()
-    );
-
-    const browser = await puppeteer.launch({
-        headless: true,
-
-        executablePath: puppeteer.executablePath(),
-
-        args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-gpu",
-            "--no-first-run",
-            "--no-zygote",
-        ],
-    });
+    let browser;
 
     try {
+        browser = await puppeteer.launch({
+            headless: true,
+
+            args: [
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu",
+            ],
+        });
+
         const page = await browser.newPage();
 
         await page.setContent(htmlContent, {
@@ -303,7 +283,6 @@ async function generatePdfFromHtml(htmlContent) {
 
         const pdfBuffer = await page.pdf({
             format: "A4",
-            printBackground: true,
 
             margin: {
                 top: "20mm",
@@ -311,22 +290,17 @@ async function generatePdfFromHtml(htmlContent) {
                 left: "15mm",
                 right: "15mm",
             },
-        });
 
-        console.log("PDF generated successfully.");
+            printBackground: true,
+        });
 
         return pdfBuffer;
     } finally {
-        await browser.close();
-
-        console.log("Puppeteer browser closed.");
+        if (browser) {
+            await browser.close();
+        }
     }
 }
-
-
-// ============================================================
-// GENERATE RESUME PDF
-// ============================================================
 
 async function generateResumePdf({
     resume,
@@ -342,7 +316,7 @@ async function generateResumePdf({
     });
 
     const prompt = `
-Generate a professional resume for a candidate with the following details:
+Generate a professional ATS-friendly resume for a candidate with the following details:
 
 Resume:
 ${resume}
@@ -353,27 +327,27 @@ ${selfDescription}
 Job Description:
 ${jobDescription}
 
-The response should be a JSON object with a single field "html"
-which contains the HTML content of the resume.
+Return a JSON object with a single field "html".
+
+The "html" field must contain complete HTML content for the resume.
 
 Requirements:
 
-1. Tailor the resume specifically to the given job description.
-2. Highlight the candidate's strengths and relevant experience.
-3. The content should sound human-written and professional.
-4. Do not mention that the resume was generated by AI.
-5. The HTML should be well-formatted and visually appealing.
-6. Keep the design simple and professional.
-7. Make the resume ATS friendly.
-8. Make the resume easy for ATS systems to parse.
-9. Do not unnecessarily add information that is not present in the candidate's details.
-10. Keep the resume approximately 1-2 pages when converted to PDF.
-11. Focus on quality rather than quantity.
-12. Include relevant skills and experience that improve the candidate's chances of getting an interview.
+1. Tailor the resume to the job description.
+2. Highlight the candidate's relevant skills and experience.
+3. Do not invent qualifications or experience.
+4. The resume should sound human-written.
+5. Keep the design simple and professional.
+6. Make the resume ATS friendly.
+7. Use clear headings.
+8. Keep the resume approximately 1-2 pages.
+9. Use professional typography.
+10. The HTML must be valid and render correctly in a browser.
 `;
 
     const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
+
         contents: prompt,
 
         config: {
@@ -384,8 +358,8 @@ Requirements:
 
     const jsonContent = JSON.parse(response.text);
 
-    if (!jsonContent || !jsonContent.html) {
-        throw new Error("Gemini did not return valid resume HTML.");
+    if (!jsonContent.html) {
+        throw new Error("Gemini did not return resume HTML");
     }
 
     const pdfBuffer = await generatePdfFromHtml(
@@ -394,11 +368,6 @@ Requirements:
 
     return pdfBuffer;
 }
-
-
-// ============================================================
-// EXPORTS
-// ============================================================
 
 module.exports = {
     generateInterviewReport,
